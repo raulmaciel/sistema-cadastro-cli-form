@@ -2,9 +2,7 @@ package com.raulmaciel.util;
 
 import com.raulmaciel.exception.LeituraArquivoException;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,6 +28,18 @@ public class FileUtil {
         System.out.println("Cadastro de Usuário");
         System.out.println("-=-=-=-=-=-=-=-=-=-=-=");
         readForm.forEach(System.out::println);
+    }
+
+    public static void writeForm(String filePath, List<String> text){
+        try(BufferedWriter writer = new BufferedWriter(new FileWriter(filePath, true))) {
+            for (String string : text) {
+                writer.write(string);
+                writer.newLine();
+            }
+
+        } catch (IOException e) {
+            System.out.println("Erro ao escrever no arquivo: " + e.getMessage());
+        }
     }
 
 }
