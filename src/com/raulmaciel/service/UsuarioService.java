@@ -1,18 +1,24 @@
 package com.raulmaciel.service;
 
 import com.raulmaciel.model.Usuario;
+import com.raulmaciel.util.FileUtil;
 
+import java.io.*;
+import java.util.Arrays;
 import java.util.InputMismatchException;
+import java.util.List;
 import java.util.Scanner;
 
 public class UsuarioService {
     private final Scanner sc;
+    public static final String CONTADOR_PATH = "data/contador.txt";
+    private static int contador = carregarContador();
 
     public UsuarioService() {
         this.sc = new Scanner(System.in);
     }
 
-    public Usuario cadastrarUsuario(){
+    public Usuario cadastrarUsuario() {
         String nome = null;
         String email = null;
         int idade = 0;
@@ -35,11 +41,52 @@ public class UsuarioService {
             return null;
         }
 
-        if (nome.isEmpty() || email.isEmpty() || idade <= 0 || altura <= 0){
+        if (nome.isEmpty() || email.isEmpty() || idade <= 0 || altura <= 0) {
             System.err.println("Erro: Não foi possível cadastrar o usuário devido a entradas inválidas.");
             return null;
         }
 
-        return new Usuario(nome, email,idade,altura);
+        return new Usuario(nome, email, idade, altura);
+    }
+
+    public static void salvarUsuario(Usuario usuario) {
+
+        if (usuario == null){
+            System.out.println("Impossivel salvar arquivo. Usuário não foi criado!");
+            return;
+        }
+        String fileName = ("data/"+ contador + "-" + usuario.getNome().toUpperCase().replace(" ", "") +".txt");
+        FileUtil.writeForm(fileName, Arrays.asList(
+                     usuario.getNome(),
+                "" + usuario.getEmail(),
+                "" + usuario.getIdade(),
+                "" + usuario.getAltura()
+        ));
+        contador++;
+        salvarContador(contador);
+    }
+
+    private static int carregarContador(){
+
+        File contador = new File(CONTADOR_PATH);
+        if (!contador.exists() || contador.length() == 0){
+            return 1;
+        }
+
+        try(BufferedReader reader = new BufferedReader(new FileReader(contador))){
+            return Integer.parseInt(reader.readLine().trim());
+        } catch (IOException | NumberFormatException e) {
+            System.err.println("Erro ao carregar o contador. Reiniciando em 1.");
+            return 1;
+        }
+
+    }
+
+    private static void salvarContador(int valor){
+        try(BufferedWriter writer = new BufferedWriter(new FileWriter(CONTADOR_PATH))) {
+            writer.write(String.valueOf(valor));
+        } catch (IOException e) {
+            System.err.println("Erro ao salvar o contador: " + e.getMessage());
+        }
     }
 }
