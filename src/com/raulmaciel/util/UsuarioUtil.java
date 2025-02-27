@@ -10,7 +10,8 @@ public class UsuarioUtil {
             System.out.println(usuario.getEmail());
             System.out.println(usuario.getIdade());
             System.out.println(usuario.getAltura());
+            return;
         }
-        System.out.println("Impossivel gerar relatório: Usuário não encontrado!");
+        System.out.println("Impossivel gerar relatório: Não foi possivel cadastrar o usuário!");
     }
 }
