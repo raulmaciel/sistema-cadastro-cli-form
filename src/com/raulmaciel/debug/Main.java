@@ -1,19 +1,11 @@
 package com.raulmaciel.debug;
 
-import com.raulmaciel.model.Usuario;
-import com.raulmaciel.service.UsuarioService;
-import com.raulmaciel.util.FileUtil;
-import com.raulmaciel.util.UsuarioUtil;
+import com.raulmaciel.model.MenuPrincipal;
 
 
 public class Main {
     public static void main(String[] args) {
-        FileUtil.printForm(FileUtil.readForm("data/formulario.txt"));
-        UsuarioService usuarioService = new UsuarioService();
-        Usuario usuario = usuarioService.cadastrarUsuario();
-
-        UsuarioUtil.imprimeUsuario(usuario);
-        UsuarioService.salvarUsuario(usuario);
+        MenuPrincipal.callMenu();
 
     }
 }
