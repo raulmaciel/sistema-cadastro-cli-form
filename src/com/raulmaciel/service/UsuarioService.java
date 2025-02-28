@@ -6,7 +6,6 @@ import com.raulmaciel.util.FileUtil;
 import java.io.*;
 import java.util.Arrays;
 import java.util.InputMismatchException;
-import java.util.List;
 import java.util.Scanner;
 
 public class UsuarioService {
@@ -24,7 +23,7 @@ public class UsuarioService {
         int idade = 0;
         double altura = 0;
         try {
-            System.out.println("-=-=-=-=-=-=-=-=-=-=-=");
+            System.out.println("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
             System.out.print("1: ");
             nome = sc.nextLine();
             System.out.print("2: ");
