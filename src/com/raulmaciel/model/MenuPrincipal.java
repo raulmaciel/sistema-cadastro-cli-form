@@ -1,6 +1,7 @@
 package com.raulmaciel.model;
 
 import com.raulmaciel.cadastro.CadastroUsuario;
+import com.raulmaciel.util.UsuarioUtil;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -27,7 +28,9 @@ public class MenuPrincipal {
                     callMenu();
                     break;
                 case 2:
-                    System.out.println("Feature em desenvolvimento!");
+                    System.out.println("\n\t-=-=-= Relátorio -=-=-=");
+                    UsuarioUtil.listarUsuarios("data");
+                    System.out.println("\n");
                     callMenu();
                     break;
                 case 3:
