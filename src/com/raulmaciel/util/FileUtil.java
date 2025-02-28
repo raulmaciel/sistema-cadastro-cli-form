@@ -24,9 +24,9 @@ public class FileUtil {
     }
 
     public static void printForm(List<String> readForm){
-        System.out.println("-=-=-=-=-=-=-=-=-=-=-=");
-        System.out.println("Cadastro de Usuário");
-        System.out.println("-=-=-=-=-=-=-=-=-=-=-=");
+        System.out.println("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
+        System.out.println("\t\t\t\tCadastro de Usuário");
+        System.out.println("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
         readForm.forEach(System.out::println);
     }
 
