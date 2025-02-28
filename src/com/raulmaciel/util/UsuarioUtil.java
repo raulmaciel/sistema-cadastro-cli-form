@@ -2,6 +2,7 @@ package com.raulmaciel.util;
 
 import com.raulmaciel.model.Usuario;
 
+
 public class UsuarioUtil {
     public static void imprimeUsuario (Usuario usuario){
         if (usuario != null){
@@ -13,5 +14,9 @@ public class UsuarioUtil {
             return;
         }
         System.out.println("Impossivel gerar relatório: Não foi possivel cadastrar o usuário!");
+    }
+
+    public static void listarUsuarios(String diretorioPath){
+        FileUtil.listarArquivos(diretorioPath);
     }
 }
