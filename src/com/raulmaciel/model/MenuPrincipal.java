@@ -1,5 +1,6 @@
 package com.raulmaciel.model;
 
+import com.raulmaciel.cadastro.CadastroPergunta;
 import com.raulmaciel.cadastro.CadastroUsuario;
 import com.raulmaciel.util.UsuarioUtil;
 
@@ -34,7 +35,8 @@ public class MenuPrincipal {
                     callMenu();
                     break;
                 case 3:
-                    System.out.println("Feature em desenvolvimento!");
+                    System.out.println("\n\t-=-=-= Cadastrar Pergunta -=-=-=");
+                    CadastroPergunta.cadastrarNovaPergunta();
                     callMenu();
                     break;
                 case 4:
