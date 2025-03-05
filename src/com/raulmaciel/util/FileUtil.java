@@ -34,10 +34,13 @@ public class FileUtil {
 
     public static void writeForm(String filePath, List<String> text){
         try(BufferedWriter writer = new BufferedWriter(new FileWriter(filePath, true))) {
-            for (String string : text) {
-                writer.write(string);
+            List<String> formulario = FileUtil.readForm(filePath);
+            int i = formulario.size();
+            for (String linha : text) {
                 writer.newLine();
+                writer.write((i+1) + " - " + linha);
             }
+
 
         } catch (IOException e) {
             System.out.println("Erro ao escrever no arquivo: " + e.getMessage());
@@ -76,6 +79,5 @@ public class FileUtil {
             throw new RuntimeException(e);
         }
     }
-
 
 }
