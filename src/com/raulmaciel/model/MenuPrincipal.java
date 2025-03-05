@@ -2,13 +2,16 @@ package com.raulmaciel.model;
 
 import com.raulmaciel.cadastro.CadastroPergunta;
 import com.raulmaciel.cadastro.CadastroUsuario;
+import com.raulmaciel.util.FileUtil;
 import com.raulmaciel.util.UsuarioUtil;
 
+import java.io.IOException;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class MenuPrincipal {
     private static final Scanner scanner = new Scanner(System.in);
+    private static final String filePath = "data/formulario.txt";
 
     public static void callMenu(){
         try {
@@ -40,7 +43,12 @@ public class MenuPrincipal {
                     callMenu();
                     break;
                 case 4:
-                    System.out.println("Feature em desenvolvimento!");
+                    System.out.println("\n\t-=-=-= Deletar Pergunta -=-=-=");
+                    try {
+                        FileUtil.deleteLine(filePath);
+                    } catch (IOException e) {
+                        System.out.println("Impossivel ler formulario: " + e.getMessage());
+                    }
                     callMenu();
                     break;
                 case 5:
