@@ -2,6 +2,7 @@ package com.raulmaciel.model;
 
 import com.raulmaciel.cadastro.CadastroPergunta;
 import com.raulmaciel.cadastro.CadastroUsuario;
+import com.raulmaciel.service.UsuarioService;
 import com.raulmaciel.util.FileUtil;
 import com.raulmaciel.util.UsuarioUtil;
 
@@ -25,24 +26,27 @@ public class MenuPrincipal {
             System.out.println("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
             System.out.print("Escolha: ");
             int option = scanner.nextInt();
-
             switch (option){
                 case 1 :
+                    scanner.nextLine();
                     CadastroUsuario.cadastrarUsuario();
                     callMenu();
                     break;
                 case 2:
+                    scanner.nextLine();
                     System.out.println("\n\t-=-=-= Relátorio -=-=-=");
                     UsuarioUtil.listarUsuarios("data");
                     System.out.println("\n");
                     callMenu();
                     break;
                 case 3:
+                    scanner.nextLine();
                     System.out.println("\n\t-=-=-= Cadastrar Pergunta -=-=-=");
                     CadastroPergunta.cadastrarNovaPergunta();
                     callMenu();
                     break;
                 case 4:
+                    scanner.nextLine();
                     System.out.println("\n\t-=-=-= Deletar Pergunta -=-=-=");
                     try {
                         FileUtil.deleteLine(filePath);
@@ -52,7 +56,11 @@ public class MenuPrincipal {
                     callMenu();
                     break;
                 case 5:
-                    System.out.println("Feature em desenvolvimento!");
+                    scanner.nextLine();
+                    System.out.println("\n\t-=-=-= Buscar Usuario por Nome, Idade ou Email -=-=-=");
+                    System.out.print("Nome: ");
+                    String nomeDoUsuario = scanner.nextLine();
+                    UsuarioService.buscarUsuario(nomeDoUsuario);
                     callMenu();
                     break;
                 case 6:
