@@ -6,11 +6,15 @@ import com.raulmaciel.util.FileUtil;
 import java.io.*;
 import java.util.Arrays;
 import java.util.InputMismatchException;
+import java.util.List;
 import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class UsuarioService {
     private final Scanner sc;
     public static final String CONTADOR_PATH = "data/contador.txt";
+    public static final String DIRETORIO_PATH = "data/";
     private static int contador = carregarContador();
 
     public UsuarioService() {
@@ -86,6 +90,53 @@ public class UsuarioService {
             writer.write(String.valueOf(valor));
         } catch (IOException e) {
             System.err.println("Erro ao salvar o contador: " + e.getMessage());
+        }
+    }
+
+    public static void buscarUsuario(String name) {
+        try {
+            File diretorio = new File(DIRETORIO_PATH);
+            if (diretorio.exists() && diretorio.isDirectory()) {
+                File[] arquivos = diretorio.listFiles();
+
+                if (arquivos != null) {
+                    for (File arquivo : arquivos) {
+                        try (BufferedReader reader = new BufferedReader(new FileReader(arquivo))) {
+                            String nomeArquivo = arquivo.getName();
+                            String regex = "^\\d-[A-Z]+.txt";
+
+                            Pattern pattern = Pattern.compile(regex);
+                            Matcher matcher = pattern.matcher(nomeArquivo);
+
+                            if (matcher.find()) {
+                                List<String> readForm = FileUtil.readForm(arquivo.getAbsolutePath());
+
+                                String nome = readForm.get(0);
+                                String email = readForm.get(1);
+                                int idade = Integer.parseInt(readForm.get(2));
+                                double altura = Double.parseDouble(readForm.get(3));
+
+                                Usuario usuario = new Usuario(nome, email, idade, altura);
+
+                                if (usuario.getNome().toLowerCase().contains(name.toLowerCase())){
+                                    System.out.println("-=-=" + usuario.getNome()+ "-=-=");
+                                    System.out.println("Idade: " + usuario.getIdade());
+                                    System.out.println("Altura: " + usuario.getAltura());
+                                    System.out.println("Email: " + usuario.getEmail());
+                                }
+                            }
+
+                        } catch (IOException e) {
+                            throw new RuntimeException(e);
+                        }
+                    }
+                } else {
+                    System.out.println("O diretorio não possui arquivos");
+                }
+
+            }
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
     }
 }
